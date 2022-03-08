@@ -1,0 +1,113 @@
+---
+title: '00A - R Configuration'
+author: "Emma Bell"
+date: '2021-04-05'
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_float: true
+    toc_depth: 2
+    fig_caption: true
+---
+
+# Summary {.tabset}
+
+This R Notebook contains code pertaining to the project 2021_03_Bell.
+
+* Aim: To configure my R environment.
+* Objectives:
+  1. Create objects specifying the path to commonly referenced directories;
+  2. Create objects specifying the parameters for generating figures;
+  3. Create an object specifying the colour scheme used in figures.
+
+To run these scripts we assume a directory structure as described in the README accompanying this GitHub. I.e.
+
+* code/ - _contains R Notebook(s) and the resulting HTML file(s)_
+* data/ - _contains any data used in this project_
+  * 01_raw/
+  * 02_clean/
+  * 03_augmented/
+* docs/ - _contains any documents pertaining to this project_
+  * Presentation_plan_template.docx
+  * Presentation_template.pptx
+  * Research_project_plan.docx
+* results/ - _contains results files_
+  * docs/
+  * figures/
+  * tables/
+
+## 1. Create objects specifying the path to commonly referenced directories
+
+The parent directory for this project is `2021_03_Bell_cfMeDIP`.
+
+```{r}
+code.dir <- file.path("code")
+data.dir <- file.path("data")
+clean.data.dir <- file.path(data.dir,"02_clean")
+augmented.data.dir <- file.path(data.dir,"03_augmented")
+docs.dir <- file.path("docs")
+results.dir <- file.path("results")
+figure.dir <- file.path(results.dir,"figures")
+table.dir <- file.path(results.dir,"tables")
+
+dirs <- list(code.dir=code.dir,data.dir=data.dir,clean.data.dir=clean.data.dir,augmented.data.dir=augmented.data.dir,docs.dir=docs.dir,results.dir=results.dir,figure.dir=figure.dir,table.dir=table.dir)
+dirs
+```
+
+## 2. Create objects specifying the parameters for generating figures
+
+All figures are outputted to the following specifications:
+
+```{r}
+units <- "cm"
+width <- 6
+height <- 6
+res <- 480
+pointsize <- 6
+
+fig.specs <- list(units = units,
+                  width = width,
+                  height = height,
+                  res = res,
+                  pointsize = pointsize)
+fig.specs
+```
+
+## 3. Create an object specifying the colour scheme used in figures
+
+This R Notebook requires the following packages:
+
+```{r}
+library(viridis)
+```
+
+The colour scheme used in this R Notebook has not yet been defined:
+
+```{r}
+# pal <- inferno(n = 9, begin = 0.2, end = 0.8)
+# pal2 <- inferno(n = 9, begin = 0.2, end = 0.8, alpha = 0.5)
+# 
+# fig.cols <- list(
+#     Donor = c(`Donor 1`=pal2[1], `Donor 2`=pal[1], `Donor 3`=pal[2]),
+#     Stimulated = c(Unstimulated="#DEA3AF",Stimulated=pal[5]),
+#     DAC = c(Untreated="lightgrey",Treated=pal[7]))
+# fig.cols
+# 
+# simple.cols <- unlist(fig.cols)[c(4,5,7)]
+# simple.cols
+```
+
+
+```{r}
+r.config <- list(dirs = dirs,
+                 fig.specs = fig.specs)
+                 # fig.cols = fig.cols,
+                 # simple.cols = simple.cols)
+r.config
+```
+
+```{r}
+saveRDS(object = r.config, file = file.path(dirs$code.dir,"r_config.RDS"))
+```
+
